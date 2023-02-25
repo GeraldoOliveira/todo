@@ -1,2 +1,2 @@
 # todo
-React native application list toDoList.
+React native application like toDoList.
