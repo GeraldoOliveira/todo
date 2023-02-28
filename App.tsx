@@ -7,7 +7,7 @@ export default function App() {
       <StatusBar
         barStyle="dark-content"
         backgroundColor="transparent"
-        translucent={true}
+        translucent={false}
       />
       <Home />
     </>
