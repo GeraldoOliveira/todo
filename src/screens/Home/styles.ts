@@ -28,7 +28,8 @@ export const styles = StyleSheet.create({
         color: "#FFFFFF",
         backgroundColor: "#262626",
         textAlign: "left",
-        marginRight: 4
+        marginRight: 4,
+        fontSize: 16
     },
     buttonAdd:{
         height:52,
@@ -54,6 +55,10 @@ export const styles = StyleSheet.create({
     plusImage:{
         height: 16,
         width: 16
+    },
+    taskStatus:{
+        height: 19,
+        width: 327
     }
 
 })
