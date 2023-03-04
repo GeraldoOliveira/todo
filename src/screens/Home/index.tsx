@@ -2,6 +2,7 @@ import { Text, View, TextInput, TouchableOpacity, FlatList, Alert, Image } from 
 import { styles } from './styles';
 
 import { Task } from "../../components/Task";
+import { EmptyTask } from "../../components/EmptyTask";
 import { useState } from "react";
 
 export function Home() {
@@ -29,6 +30,47 @@ export function Home() {
                                 />
                             </Text>
                         </TouchableOpacity>
+                    </View>
+                </View>
+                <View style={styles.containerTasks}>
+                    <View style={styles.taskStatus}>
+                        <View style={styles.createdContainer}>
+                            <Text style={styles.createdText}>
+                                Criadas
+                            </Text>
+                            <Text style={styles.createdCounter}>
+                                0
+                            </Text>
+                        </View>
+                        <View style={styles.completedContainer}>
+                            <Text style={styles.completedText}>
+                                Concluídas
+                            </Text>
+                            <Text style={styles.completedCounter}>
+                                0
+                            </Text>
+                        </View>
+                    </View>
+                    <View style={styles.tasksView}>
+                        <FlatList
+                            // data={} //participants}
+                            keyExtractor={item => item}
+                            // renderItem={({ item }) => (
+
+                            //     <Participant
+                            //         key={item}
+                            //         name={item}
+                            //         onRemove={() => handleParticipantRemove(item)}
+                            //     />
+                            //)}
+                            ListEmptyComponent={() => (
+
+                                <EmptyTask({ item })
+
+                                />
+                                
+                            )}
+                        />
                     </View>
                 </View>
             </View>
