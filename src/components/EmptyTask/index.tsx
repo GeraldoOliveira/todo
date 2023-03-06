@@ -2,10 +2,9 @@
 import { View, Text, Image } from 'react-native';
 import { styles } from './styles';
 
-export function EmptyTask({ }) {
+export function EmptyTask() {
 
     return (
-
         <View style={styles.listEmptyContainer}>
             <Image
                 style={styles.logoClipboardImage}

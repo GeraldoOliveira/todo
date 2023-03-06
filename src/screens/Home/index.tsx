@@ -2,6 +2,7 @@ import { Text, View, TextInput, TouchableOpacity, FlatList, Alert, Image } from 
 import { styles } from './styles';
 
 import { Task } from "../../components/Task";
+import { EmptyTask } from "../../components/EmptyTask";
 
 import { useState } from "react";
 
@@ -27,6 +28,13 @@ export function Home() {
             }
         ])
     }
+
+    function handleEmptyTask() {
+        return (
+          <EmptyTask />
+        );
+      }
+
 
     return (
         <>
@@ -86,21 +94,9 @@ export function Home() {
                                     // onRemove={() => handleParticipantRemove(item)}
                                 />
                             )}
-                            ListEmptyComponent={() => (
-
-                                <View style={styles.listEmptyContainer}>
-                                    <Image
-                                        style={styles.logoClipboardImage}
-                                        source={require('../../../assets/Clipboard.png')}
-                                    />
-                                    <Text style={styles.emptyTextTitle}>
-                                        Você ainda não tem tarefas cadastradas
-                                    </Text>
-                                    <Text style={styles.emptyText}>
-                                        Crie tarefas e organize seus itens a fazer
-                                    </Text>
-                                </View>
-                            )}
+                            ListEmptyComponent= { 
+                                handleEmptyTask
+                            }
                         />
                     </View>
                 </View>
