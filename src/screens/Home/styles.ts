@@ -139,7 +139,7 @@ export const styles = StyleSheet.create({
         fontWeight:"400",
         color: "#808080",
         textAlign:"center"
-    }
+    },
 
 
 })

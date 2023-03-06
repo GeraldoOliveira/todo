@@ -2,10 +2,31 @@ import { Text, View, TextInput, TouchableOpacity, FlatList, Alert, Image } from 
 import { styles } from './styles';
 
 import { Task } from "../../components/Task";
-import { EmptyTask } from "../../components/EmptyTask";
+
 import { useState } from "react";
 
 export function Home() {
+
+    const [tasks, setTasks] = useState<string[]>([]);
+    const [taskText, setTaskText] = useState('');
+
+    function handleTaskAdd() {
+        setTasks(prevState => [...prevState, taskText]);
+        setTaskText('');
+    }
+
+    function handleTaskRemove(text: string) {
+        Alert.alert("Remover", `Remover a atividade?`, [
+            {
+                text: 'Sim',
+                onPress: () => setTasks(prevState => prevState.filter(tasks => tasks !== text))
+            },
+            {
+                text: 'Não',
+                style: 'cancel'
+            }
+        ])
+    }
 
     return (
         <>
@@ -21,8 +42,10 @@ export function Home() {
                             style={styles.buttonText}
                             placeholder="Adicione uma nova tarefa"
                             placeholderTextColor={"#808080"}
+                            onChangeText={setTaskText}
+                            value={taskText}
                         />
-                        <TouchableOpacity style={styles.buttonAdd} >
+                        <TouchableOpacity style={styles.buttonAdd} onPress={handleTaskAdd}>
                             <Text style={styles.buttonPlus}>
                                 <Image
                                     style={styles.plusImage}
@@ -53,22 +76,30 @@ export function Home() {
                     </View>
                     <View style={styles.tasksView}>
                         <FlatList
-                            // data={} //participants}
+                            data={tasks}
                             keyExtractor={item => item}
-                            // renderItem={({ item }) => (
+                            renderItem={({ item }) => (
 
-                            //     <Participant
-                            //         key={item}
-                            //         name={item}
-                            //         onRemove={() => handleParticipantRemove(item)}
-                            //     />
-                            //)}
+                                <Task
+                                    key={item}
+                                    text={item}
+                                    // onRemove={() => handleParticipantRemove(item)}
+                                />
+                            )}
                             ListEmptyComponent={() => (
 
-                                <EmptyTask({ item })
-
-                                />
-                                
+                                <View style={styles.listEmptyContainer}>
+                                    <Image
+                                        style={styles.logoClipboardImage}
+                                        source={require('../../../assets/Clipboard.png')}
+                                    />
+                                    <Text style={styles.emptyTextTitle}>
+                                        Você ainda não tem tarefas cadastradas
+                                    </Text>
+                                    <Text style={styles.emptyText}>
+                                        Crie tarefas e organize seus itens a fazer
+                                    </Text>
+                                </View>
                             )}
                         />
                     </View>
