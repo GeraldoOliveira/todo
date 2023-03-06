@@ -4,27 +4,35 @@ import { StyleSheet } from "react-native";
 export const styles = StyleSheet.create({
     container:{
         width:"100%",
+        height: 64,
         backgroundColor:"#333333",
         borderRadius:8,
         flexDirection: "row",
-        alignItems: "center",
-        marginBottom: 8
+        marginBottom: 8,
+        padding:12,
+        alignItems:"center"
     },
     checkButton: {
-        width:24,
-        height: 24,
-        marginRight: 8,
+        width:32,
+        height: 32,
+        marginRight:8,
+        paddingBottom:2,
+        backgroundColor:"#FFF",
+        position:"relative"
     },
     textButton: {
         color: "#F2F2F2",
         fontSize:14,
         fontWeight:"400",
-        lineHeight:140,
-        marginRight: 8,
+        height:40,
+        width:235,
+        alignItems:"center",
+        backgroundColor:"#FFF"
     },
     deleteButton: {
         width:32,
         height: 32,
+        backgroundColor:"#FFF"
     }
 
 })
