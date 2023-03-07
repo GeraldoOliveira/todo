@@ -19,7 +19,7 @@ export const styles = StyleSheet.create({
         paddingBottom:2,
         alignItems:"center"
     },
-    textButton: {
+    textButtonUnchecked: {
         color: "#F2F2F2",
         fontSize:14,
         fontWeight:"400",
@@ -27,14 +27,25 @@ export const styles = StyleSheet.create({
         width:235,
         alignItems:"center"
     },
-    deleteButton: {
+    textButtonChecked:{
+        color: "#F2F2F2",
+        fontSize:14,
+        fontWeight:"400",
+        height:40,
+        width:235,
+        alignItems:"center",
+        textDecorationLine: "line-through",
+        textDecorationStyle: "solid"
+    },
+    deleteContainer: {
         width:32,
         height: 32,
-        backgroundColor:"#FFF",
         alignItems:"center",
         justifyContent: "center",
-        resizeMode:"repeat"
-
+    },
+    deleteButton: {
+        width:12.5,
+        height: 14,
     }
 
 })

@@ -6,21 +6,40 @@ import { EmptyTask } from "../../components/EmptyTask";
 
 import { useState } from "react";
 
+type NewTask = {
+    key: number,
+    taskDescription: string,
+    isChecked: boolean
+}
+
 export function Home() {
 
-    const [tasks, setTasks] = useState<string[]>([]);
+    const [tasks, setTasks] = useState<NewTask[]>([]);
     const [taskText, setTaskText] = useState('');
 
     function handleTaskAdd() {
-        setTasks(prevState => [...prevState, taskText]);
+
+        const newTask: NewTask = {
+            key: tasks.length + 1,
+            taskDescription: taskText,
+            isChecked: false
+        }
+
+        setTasks([...tasks, newTask]);
         setTaskText('');
+        console.log(tasks);
+
+    }
+
+    function handleTaskCheck(isChecked: boolean) {
+        return isChecked
     }
 
     function handleTaskRemove(text: string) {
         Alert.alert("Remover", `Remover a atividade?`, [
             {
                 text: 'Sim',
-                onPress: () => setTasks(prevState => prevState.filter(tasks => tasks !== text))
+                onPress: () => setTasks(prevState => prevState.filter(tasks => tasks.taskDescription !== text))
             },
             {
                 text: 'Não',
@@ -31,10 +50,9 @@ export function Home() {
 
     function handleEmptyTask() {
         return (
-          <EmptyTask />
+            <EmptyTask />
         );
-      }
-
+    }
 
     return (
         <>
@@ -84,17 +102,18 @@ export function Home() {
                     </View>
                     <View style={styles.tasksView}>
                         <FlatList
-                            data={tasks}
-                            keyExtractor={item => item}
+                            data= { tasks }
+                            keyExtractor = {item => item.taskDescription}
                             renderItem={({ item }) => (
 
                                 <Task
-                                    key={item}
-                                    text={item}
-                                    // onRemove={() => handleParticipantRemove(item)}
+                                    key={item.key}
+                                    text={item.taskDescription}
+                                    onRemove={() => handleTaskRemove(item.taskDescription)}
+                                    onPress={(isChecked) => handleTaskCheck(false)})}
                                 />
                             )}
-                            ListEmptyComponent= { 
+                            ListEmptyComponent={
                                 handleEmptyTask
                             }
                         />

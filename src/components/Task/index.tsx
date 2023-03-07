@@ -5,32 +5,30 @@ import { styles } from './styles';
 
 type Props = {
     text: string;
-    // onRemove: () => string;
+    onRemove: () => void;
+    onPress: (isChecked: boolean) => boolean;
 }
 
-export function Task({ text }: Props) {
+export function Task({ text, onPress, onRemove }: Props) {
 
     return (
         <View style={styles.container}>
             <TouchableOpacity style={styles.checkButton} >
-                <Text>
-                    <BouncyCheckbox
-                        style={styles.checkButton}
-                        size={25}
-                        fillColor="#5E60CE"
-                        text="Custom Checkbox"
-                        iconStyle={{ borderColor: "#FFF" }}
-                        innerIconStyle={{
-                            borderWidth: 2,
-                        }}
-                        onPress={(isChecked: boolean) => { }}
-                    />
-                </Text>
+                <BouncyCheckbox
+                    style={styles.checkButton}
+                    size={25}
+                    fillColor="#5E60CE"
+                    iconStyle={{ borderColor: "#FFF" }}
+                    innerIconStyle={{
+                        borderWidth: 2,
+                    }}
+                    onPress={(isChecked: boolean) => { onPress(isChecked) }}
+                />
             </TouchableOpacity>
-            <Text style={styles.textButton}>
-                {text}
+            <Text style={isChecked == true ? styles.textButtonChecked : styles.textButtonUnchecked}>
+                { text }
             </Text>
-            <TouchableOpacity >
+            <TouchableOpacity style={styles.deleteContainer} onPress={ onRemove }>
                 <Image style={styles.deleteButton}
                     source={require('../../../assets/delete.png')}
                 />
