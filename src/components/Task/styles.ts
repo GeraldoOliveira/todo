@@ -17,22 +17,35 @@ export const styles = StyleSheet.create({
         height: 32,
         marginRight:8,
         paddingBottom:2,
-        backgroundColor:"#FFF",
-        position:"relative"
+        alignItems:"center"
     },
-    textButton: {
+    textButtonUnchecked: {
+        color: "#F2F2F2",
+        fontSize:14,
+        fontWeight:"400",
+        height:40,
+        width:235,
+        alignItems:"center"
+    },
+    textButtonChecked:{
         color: "#F2F2F2",
         fontSize:14,
         fontWeight:"400",
         height:40,
         width:235,
         alignItems:"center",
-        backgroundColor:"#FFF"
+        textDecorationLine: "line-through",
+        textDecorationStyle: "solid"
     },
-    deleteButton: {
+    deleteContainer: {
         width:32,
         height: 32,
-        backgroundColor:"#FFF"
+        alignItems:"center",
+        justifyContent: "center",
+    },
+    deleteButton: {
+        width:12.5,
+        height: 14,
     }
 
 })

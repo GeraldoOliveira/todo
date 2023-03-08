@@ -21,17 +21,12 @@ export const styles = StyleSheet.create({
         marginTop:70,
         marginLeft: 132
     },
-    logoClipboardImage:{
-        height:56,
-        width:56,
-        marginTop:48,
-    },
     buttonText:{
         height:54,
         width:271,
         borderRadius: 6,
         paddingLeft: 16,
-        color: "#808080",
+        color: "#F2F2F2",
         backgroundColor: "#262626",
         textAlign: "left",
         marginRight: 4,
@@ -124,22 +119,4 @@ export const styles = StyleSheet.create({
         width: 327,
         height: "100%"
     },
-    listEmptyContainer:{
-        alignItems:"center",
-    },
-    emptyTextTitle:{
-        fontSize: 14,
-        fontWeight:"700",
-        color: "#808080",
-        marginTop: 16,
-        textAlign:"center"
-    },
-    emptyText:{
-        fontSize: 14,
-        fontWeight:"400",
-        color: "#808080",
-        textAlign:"center"
-    },
-
-
 })
