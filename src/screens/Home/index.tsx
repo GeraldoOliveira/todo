@@ -16,8 +16,14 @@ export function Home() {
 
     const [tasks, setTasks] = useState<NewTask[]>([]);
     const [taskText, setTaskText] = useState('');
+    const [createdTasks, setCreatedTasks] = useState(0);
+    const [completedTasks, setCompletedTasks] = useState(0);
 
     function handleTaskAdd() {
+        if (tasks.filter((obj) => obj.taskDescription === taskText).length > 0) {
+            setTaskText('');
+            return Alert.alert("ATIVIDADE DUPLICADA", `Atividade já existe na lista de atividades.`)
+        }
 
         const newTask: NewTask = {
             key: tasks.length + 1,
@@ -27,19 +33,23 @@ export function Home() {
 
         setTasks([...tasks, newTask]);
         setTaskText('');
-        console.log(tasks);
 
     }
 
-    function handleTaskCheck(isChecked: boolean) {
-        return isChecked
+    function changeCounterStatus() {
+        setCreatedTasks(tasks.filter((obj) => obj.isChecked === false).length)
+        setCompletedTasks(tasks.filter((obj) => obj.isChecked === true).length)
     }
 
     function handleTaskRemove(text: string) {
         Alert.alert("Remover", `Remover a atividade?`, [
             {
                 text: 'Sim',
-                onPress: () => setTasks(prevState => prevState.filter(tasks => tasks.taskDescription !== text))
+                onPress: () => {
+                    setTasks(prevState => prevState.filter(tasks => tasks.taskDescription !== text)),
+                    setCreatedTasks((tasks.filter((obj) => obj.isChecked === false).length) -1),
+                    setCompletedTasks((tasks.filter((obj) => obj.isChecked === true).length) - 1)
+                }
             },
             {
                 text: 'Não',
@@ -71,7 +81,7 @@ export function Home() {
                             onChangeText={setTaskText}
                             value={taskText}
                         />
-                        <TouchableOpacity style={styles.buttonAdd} onPress={handleTaskAdd}>
+                        <TouchableOpacity style={styles.buttonAdd} onPressIn={handleTaskAdd} onPress={changeCounterStatus}>
                             <Text style={styles.buttonPlus}>
                                 <Image
                                     style={styles.plusImage}
@@ -88,7 +98,7 @@ export function Home() {
                                 Criadas
                             </Text>
                             <Text style={styles.createdCounter}>
-                                0
+                                {createdTasks}
                             </Text>
                         </View>
                         <View style={styles.completedContainer}>
@@ -96,21 +106,21 @@ export function Home() {
                                 Concluídas
                             </Text>
                             <Text style={styles.completedCounter}>
-                                0
+                                {completedTasks}
                             </Text>
                         </View>
                     </View>
                     <View style={styles.tasksView}>
                         <FlatList
-                            data= { tasks }
-                            keyExtractor = {item => item.taskDescription}
+                            data={tasks}
+                            keyExtractor={item => item.taskDescription}
                             renderItem={({ item }) => (
 
                                 <Task
                                     key={item.key}
                                     text={item.taskDescription}
-                                    onRemove={() => handleTaskRemove(item.taskDescription)}
-                                    onPress={(isChecked) => handleTaskCheck(false)})}
+                                    onRemove={() => { handleTaskRemove(item.taskDescription) }}
+                                    onPress={(isCheck) => { item.isChecked = isCheck, changeCounterStatus() }}
                                 />
                             )}
                             ListEmptyComponent={
