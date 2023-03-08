@@ -25,7 +25,7 @@ export function Task({ text, onPress, onRemove }: Props) {
                         borderWidth: 2,
                     }}
                     onPress={() => {
-                        setCheckboxState(!checkboxState),
+                        setCheckboxState(!checkboxState)
                         onPress(!checkboxState)
                     }}
                 />

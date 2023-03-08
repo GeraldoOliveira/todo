@@ -46,9 +46,7 @@ export function Home() {
             {
                 text: 'Sim',
                 onPress: () => {
-                    setTasks(prevState => prevState.filter(tasks => tasks.taskDescription !== text)),
-                    setCreatedTasks((tasks.filter((obj) => obj.isChecked === false).length) -1),
-                    setCompletedTasks((tasks.filter((obj) => obj.isChecked === true).length) - 1)
+                    setTasks(prevState => prevState.filter(tasks => tasks.taskDescription !== text))
                 }
             },
             {
@@ -81,7 +79,7 @@ export function Home() {
                             onChangeText={setTaskText}
                             value={taskText}
                         />
-                        <TouchableOpacity style={styles.buttonAdd} onPressIn={handleTaskAdd} onPress={changeCounterStatus}>
+                        <TouchableOpacity style={styles.buttonAdd} onPressIn={handleTaskAdd}>
                             <Text style={styles.buttonPlus}>
                                 <Image
                                     style={styles.plusImage}
@@ -98,7 +96,7 @@ export function Home() {
                                 Criadas
                             </Text>
                             <Text style={styles.createdCounter}>
-                                {createdTasks}
+                                {(tasks.filter((obj) => obj.isChecked === false).length)}
                             </Text>
                         </View>
                         <View style={styles.completedContainer}>
@@ -106,7 +104,7 @@ export function Home() {
                                 Concluídas
                             </Text>
                             <Text style={styles.completedCounter}>
-                                {completedTasks}
+                                {(tasks.filter((obj) => obj.isChecked === true).length)}
                             </Text>
                         </View>
                     </View>
@@ -120,7 +118,7 @@ export function Home() {
                                     key={item.key}
                                     text={item.taskDescription}
                                     onRemove={() => { handleTaskRemove(item.taskDescription) }}
-                                    onPress={(isCheck) => { item.isChecked = isCheck, changeCounterStatus() }}
+                                    onPress={(isCheck) => { item.isChecked = isCheck; changeCounterStatus() }}
                                 />
                             )}
                             ListEmptyComponent={
